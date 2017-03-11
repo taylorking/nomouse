@@ -1,5 +1,4 @@
 #import "Screen.h"
-#import "config.h"
 
 @implementation Screen
 
@@ -30,21 +29,23 @@
     [self setBright:[self getBright] + delta];
 };
 
-- (void)callback {
+- (void)restore {
     [self changeBy:BRIGHTNESS_INCREMENT];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:1
-                                                      target:self
-                                                    selector:@selector(callback)
-                                                    userInfo:nil
-                                                     repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:1
+                                     target:self
+                                   selector:@selector(restore)
+                                   userInfo:nil
+                                    repeats:YES];
+
+    void (^onClick)(NSEvent*) = ^(NSEvent* event) {
+        [self changeBy:BRIGHTNESS_DECREMENT];
+    };
 
     [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask
-                                           handler:^(NSEvent* event) {
-                                               [self changeBy:BRIGHTNESS_DECREMENT];
-                                           }];
+                                           handler:onClick];
 }
  
 @end
