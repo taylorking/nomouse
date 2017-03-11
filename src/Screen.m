@@ -1,4 +1,5 @@
 #import "Screen.h"
+#import "config.h"
 
 @implementation Screen
 
@@ -30,7 +31,7 @@
 };
 
 - (void)callback {
-    [self changeBy:0.001];
+    [self changeBy:BRIGHTNESS_INCREMENT];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -42,7 +43,7 @@
 
     [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask
                                            handler:^(NSEvent* event) {
-                                               [self changeBy:-0.2];
+                                               [self changeBy:BRIGHTNESS_DECREMENT];
                                            }];
 }
  
