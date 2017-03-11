@@ -6,3 +6,5 @@ over the next 20 seconds. This is supposed to be annoying and motivate you to
 learn keyboard shortcuts.
 
 Build with `make`; run with `bin/nomouse`.
+
+todo: whitelist certain programs, read settings from config
